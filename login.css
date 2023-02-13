@@ -1,0 +1,11 @@
+.rightimg{
+    height: 100%;
+    position: absolute;
+    right: 0;
+}
+.signup-form{
+    display: flex;
+}
+.flexed{
+    margin-left: 150px;
+}

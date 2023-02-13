@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameHub | Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+</head>
+
+<body>
+    <div class="signup-form">
+        <div class="flex-img">
+            <img class="leftimg" src="./images/MacBook Air - 2.png" alt="" srcset="" />
+        </div>
+        <div class="flex-items">
+            <div class="flexed">
+                <h2>Welcome to GameHub</h2>
+                <h4>
+                    Sign in to get started and know what's happening around in the
+                    gaming world,your world
+                </h4>
+                <input placeholder="Firstname" type="text" name="" id="firstname" /><br /><br />
+                <input placeholder="Lastname" type="text" name="" id="lastname" /><br /><br />
+                <input placeholder="Email" type="email" name="" id="email" /><br /><br />
+                <input placeholder="Password" type="password" name="" id="password"><br /><br />
+                <div class="passwordcheckdiv">
+                    <input type="checkbox" onclick="myFunction()"><span class="passwordcheck">Hide
+                        Password</span><br /><br />
+                </div>
+                <button class="signupbtn" onclick="signup(event)">Sign Up</button><br /><br />
+                <button class="googlebtn" onclick="signupgoogle()">
+                    <img class="googlelogo" src="./images/search.png" alt="" srcset="" />
+                    Sign up with Google
+                </button>
+                <div class="already">
+                    Already have an account?
+                    <a href="./login.html"><span class="login-already">Login</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDa6dbNcskd_DM2l8fw_BJiPbdO_W8kTZI",
+        authDomain: "gamehub-4d95e.firebaseapp.com",
+        projectId: "gamehub-4d95e",
+        storageBucket: "gamehub-4d95e.appspot.com",
+        messagingSenderId: "722499376105",
+        appId: "1:722499376105:web:049f7dc9a202d09076f178"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    let provider = new firebase.auth.GoogleAuthProvider();
+</script>
+<script>
+    function signup(ev) {
+        ev.preventDefault();
+        firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
+            .then((userCredential) => {
+                // Signed in 
+                var user = userCredential.user;
+                alert("Account has been created successfully")
+                window.location.href = "./login.html"
+                // ...
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert("An error ocurred");
+                console.log(error);
+                // ..
+            });
+    }
+    function signupgoogle() {
+            provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+            firebase.auth()
+                .signInWithPopup(provider)
+                .then((result) => {
+                    /** @type {firebase.auth.OAuthCredential} */
+                    var credential = result.credential;
+
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    var token = credential.accessToken;
+                    // The signed-in user info.
+                    var user = result.user;
+                    // IdP data available in result.additionalUserInfo.profile.
+                    alert("Account created successfully")
+                    console.log(user);
+                    window.location.href = "./login.html"
+                    // ...
+                }).catch((error) => {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    console.log(error);
+                    // ...
+                });
+            }
+</script>
+
+</html>

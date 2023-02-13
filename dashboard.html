@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub | Blog of Games</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="dashboard">
+            <div class="buttons">
+                <div class="buttondiv">
+                    <button class="dashboardbtn" onclick="post()">Post Blog</button>
+                </div>
+                <div class="buttondiv">
+                    <button class="dashboardbtn" onclick="view()">View Blogs</button>
+                </div>
+                <div class="buttondiv">
+                    <button class="dashboardbtn" onclick="like()">Liked Blogs</button>
+                </div>
+                <div class="buttondiv">
+                    <button class="dashboardbtn" onclick="logout()">Log Out</button>
+                </div>
+            </div>
+        </div>
+        <div class="displayscreen">
+            <div id="postscreen">
+                <textarea placeholder="Blog Title" name="" id="blogtitle" cols="55" rows="1" value=""></textarea>
+                <textarea placeholder="Start Typing" name="" id="blogtyping" cols="90" rows="1" value=""></textarea><br>
+                <textarea placeholder="Blog Author" name="" id="blogauthor" cols="20" rows="1" value=""></textarea><br>
+                <button class="postblogbtn" onclick="postblog()">Post Blog</button>
+            </div>
+            <div id="viewscreen">
+
+            </div>
+            <div id="likescreen">
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDa6dbNcskd_DM2l8fw_BJiPbdO_W8kTZI",
+        authDomain: "gamehub-4d95e.firebaseapp.com",
+        projectId: "gamehub-4d95e",
+        storageBucket: "gamehub-4d95e.appspot.com",
+        messagingSenderId: "722499376105",
+        appId: "1:722499376105:web:049f7dc9a202d09076f178"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+</script>
+<script>
+    let postscreen = document.getElementById("postscreen")
+    let viewscreen = document.getElementById("viewscreen")
+    let likescreeen = document.getElementById("likescreen")
+    let blogauthor = document.getElementById("blogauthor")
+    let blogtitle = document.getElementById("blogtitle")
+    let blogtyping = document.getElementById("blogtyping")
+    let dateOfPost = new Date()
+
+    let blogArray = []
+    postscreen.style.display = "none";
+    likescreen.style.display = "none";
+    viewscreen.style.display = "block";
+    function post() {
+        postscreen.style.display = "block";
+        likescreen.style.display = "none";
+        viewscreen.style.display = "none";
+    }
+    function view() {
+        postscreen.style.display = "none";
+        likescreen.style.display = "none";
+        viewscreen.style.display = "block";
+    }
+    function like() {
+        postscreen.style.display = "none";
+        likescreen.style.display = "block";
+        viewscreen.style.display = "none";
+    }
+    function postblog() {
+        blogArray.push({
+            Blogtitle: blogtitle.value,
+            Blogtext: blogtyping.value,
+            Blogauthor: blogauthor.value
+        });
+        console.log(blogArray);
+
+        // Store the updated blogArray in local storage
+        localStorage.setItem("blogArray", JSON.stringify(blogArray));
+
+        viewscreen.innerHTML = "";
+        for (let index = 0; index < blogArray.length; index++) {
+            const element = blogArray[index];
+            viewscreen.innerHTML += `
+  <div class = "backtick">
+        <p class = "blogtitlebacktick"> ${element.Blogtitle}</p>
+        <p class = "blogtextbacktick"> ${element.Blogtext}</p>
+        <p class = "blogauthorbacktick"><span class = "writtenby">Written by </span> ${element.Blogauthor}</p>
+        <p class = "dateofpost">${dateOfPost}</p>
+      <button class = "delbtn" onclick="del(${index})">Delete</button>
+       <button class = "likebtn" onclick = "likefnct()" class="like-button">Like</button>
+       </div>
+    `;
+        }
+        blogauthor.value = "";
+        blogtitle.value = "";
+        blogtyping.value = "";
+    }
+    window.onload = function () {
+        // Retrieve the stored blogArray from local storage
+        let storedBlogArray = JSON.parse(localStorage.getItem("blogArray"));
+        if (storedBlogArray) {
+            blogArray = storedBlogArray;
+        }
+
+        // Render the blogArray to the viewscreen
+        for (let index = 0; index < blogArray.length; index++) {
+            const element = blogArray[index];
+            viewscreen.innerHTML += `
+        <div class = "backtick">
+        <p class = "blogtitlebacktick"> ${element.Blogtitle}</p>
+        <p class = "blogtextbacktick"> ${element.Blogtext}</p>
+        <p class = "blogauthorbacktick"><span class = "writtenby">Written by </span> ${element.Blogauthor}</p>
+        <p class = "dateofpost">${dateOfPost}</p>
+      <button class = "delbtn" onclick="del(${index})">Delete</button>
+       <button class = "likebtn" onclick = "likefnct()" class="like-button">Like</button>
+       </div>
+
+    `;
+        }
+    };
+
+    function del(index) {
+        console.log(index);
+        blogArray.splice(index, 1);
+        console.log(blogArray);
+        localStorage.setItem("blogArray", JSON.stringify(blogArray));
+        viewscreen.innerHTML = "";
+        for (let index = 0; index < blogArray.length; index++) {
+            const element = blogArray[index];
+            viewscreen.innerHTML += `
+      <div class = "backtick">
+        <p class = "blogtitlebacktick"> ${element.Blogtitle}</p>
+        <p class = "blogtextbacktick"> ${element.Blogtext}</p>
+        <p class = "blogauthorbacktick"><span class = "writtenby">Written by </span> ${element.Blogauthor}</p>
+        <p class = "dateofpost">${dateOfPost}</p>
+      <button class = "delbtn" onclick="del(${index})">Delete</button>
+       <button class = "likebtn" onclick = "likefnct()" class="like-button">Like</button>
+       </div>
+`;
+        }
+        blogauthor.value = "";
+        blogtitle.value = "";
+        blogtyping.value = "";
+    }
+    // let likedArrays = [];
+    // function likefnct(index) {
+    //     // code to add the liked array to the likedArrays array
+    //     likedArrays.push(blogArray[index]);
+    //     console.log(likedArrays);
+
+    //     // Store the updated likedArrays in local storage
+    //     localStorage.setItem("likedArrays", JSON.stringify(likedArrays));
+    // }
+
+    // window.onload = function () {
+    //     // Retrieve the stored likedArrays from local storage
+    //     let storedLikedArrays = JSON.parse(localStorage.getItem("likedArrays"));
+    //     if (storedLikedArrays) {
+    //         likedArrays = storedLikedArrays;
+    //     }
+    // }
+    function logout() {
+        firebase.auth().signOut().then(() => {
+            window.location.href = "login.html"
+        }).catch((error) => {
+            alert("Couldn't log out")
+        });
+    }
+</script>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameHub | Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+</head>
+
+<body>
+  <div class="signup-form">
+    <div class="flex-items">
+      <div class="flexed">
+        <h2>Welcome Back to GameHub</h2>
+        <h4>Log in to continue to GameHub</h4>
+        <input placeholder="Email" type="email" name="" id="email" /><br /><br />
+        <input placeholder="Password" type="password" name="" id="password" /><br /><br />
+        <div class="passwordcheckdiv">
+          <input type="checkbox" onclick="myFunction()" name="" id="checkbox" /><span class="passwordcheck">Check
+            Password</span><br /><br />
+        </div>
+        <button class="signupbtn" onclick="login(event)">Log in</button><br /><br />
+        <button class="googlebtn" onclick="logingoogle()">
+          <img class="googlelogo" src="./images/search.png" alt="" srcset="" />
+          Login with Google
+        </button>
+        <div class="already">
+          Don't have an account?<a href="./index.html">
+            <span class="login-already">Create account</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="flex-img">
+      <img class="rightimg" src="./images/c4d woks.jpg" alt="" srcset="" />
+    </div>
+  </div>
+</body>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDa6dbNcskd_DM2l8fw_BJiPbdO_W8kTZI",
+    authDomain: "gamehub-4d95e.firebaseapp.com",
+    projectId: "gamehub-4d95e",
+    storageBucket: "gamehub-4d95e.appspot.com",
+    messagingSenderId: "722499376105",
+    appId: "1:722499376105:web:049f7dc9a202d09076f178"
+  };
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  let provider = new firebase.auth.GoogleAuthProvider();
+</script>
+<script>
+  function myFunction() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  function login(ev) {
+    ev.preventDefault();
+    firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        alert("Welcome Back")
+        window.location.href = "./dashboard.html"
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert("User not found");
+        console.log(error);
+      });
+  }
+  function logingoogle() {
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    firebase.auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // IdP data available in result.additionalUserInfo.profile.
+        alert("Account created successfully")
+        console.log(user);
+        window.location.href = "./dashboard.html"
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        console.log(error);
+        // ...
+      });
+  }
+</script>
+
+</html>

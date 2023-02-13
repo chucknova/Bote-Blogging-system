@@ -1,0 +1,93 @@
+body{
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+}
+.signup-form{
+    display: flex;
+}
+/* .flex-img{
+    width: 500px;
+    background-image: url(./images/c4d\ woks.jpg);
+    background-size: contain;
+    background-repeat: none;
+    height:600px;
+
+} */
+.flex-items{
+    text-align: center;
+    margin-top: 100px;
+}
+.flexed{
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+}
+h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+h4{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    width: 350px;
+    margin-top: -20px;
+    color: rgba(0, 0, 0, 0.9);
+    line-height: -15px;
+}
+input{
+    padding-right: 200px;
+    border-right: 0px;
+    border-left: 0px;
+    border-top: 0px;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+    padding-bottom: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+}
+.passwordcheckdiv{
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    margin-right: 250px;
+    margin-top: -10px;
+}
+.signupbtn{
+    border: none;
+    background-color: rgb(135, 55, 255);
+    color: white;
+    width: 370px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+.googlebtn{
+    border: none;
+    background-color: rgb(243, 236, 255);
+    color: black;
+    width: 370px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+.googlelogo{
+    width: 15px;
+    padding-right: 5px;
+}
+.leftimg{
+    height: 80%;
+}
+.already{
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    margin-top: 10px;
+}
+.login-already{
+    color: rgb(135, 55, 255);
+}

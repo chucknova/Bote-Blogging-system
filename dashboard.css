@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: none;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: 1px solid black;
+    outline: none;
+
+}
+
+.container {
+    display: flex;
+}
+
+.dashboard {
+    background-color: rgb(128, 53, 208);
+    padding: 15px;
+    height: 100vh;
+    position: fixed;
+}
+
+.dashboardbtn {
+    width: 200px;
+    height: 45px;
+    border: none;
+    background-color: rgb(142, 78, 210);
+    color: white;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dashboardbtn:hover {
+    background-color: white;
+    color: black;
+    transition: all .3s ease-in-out;
+}
+
+.buttondiv {
+    padding: 15px;
+}
+
+.displayscreen {
+    margin-left: 300px;
+    margin-top: 40px;
+}
+
+#blogtitle {
+    resize: none;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    outline: none;
+    overflow: hidden;
+    padding-top: 10px;
+    font-weight: calc(400);
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#blogtyping {
+    resize: none;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    outline: none;
+    overflow: hidden;
+    padding-top: 300px;
+    font-weight: calc(400);
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#blogauthor {
+    resize: none;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    outline: none;
+    overflow: hidden;
+    padding-top: 50px;
+    font-weight: calc(400);
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.postblogbtn {
+    border: none;
+    width: 150px;
+    padding: 10px;
+    color: white;
+    background-color: rgb(109, 37, 225);
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 20px;
+    font-weight: 300;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.delbtn,
+.likebtn {
+    border: none;
+    width: 70px;
+    height: 30px;
+    color: white;
+    background-color: rgb(226, 55, 40);
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.likebtn {
+    background-color: rgb(227, 227, 227);
+    color: rgb(59, 59, 59);
+}
+
+.backtick {
+    margin-bottom: 20px;
+}
+
+.blogtitlebacktick {
+    font-size: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.blogtextbacktick {
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    max-width: 850px;
+}
+
+.writtenby {
+    font-weight: 400;
+}
+
+.blogauthorbacktick {
+    margin-top: 10px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.dateofpost {
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}

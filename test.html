@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <style>
+        .list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>To-Do List</h2>
+    <input type="text" id="task-input" placeholder="Enter task">
+    <button id="add-task">Add Task</button>
+    <div id="task-list" class="list"></ul>
+</body>
+
+<!-- JavaScript Code -->
+<script>
+    const taskInput = document.querySelector("#task-input");
+    const addTaskButton = document.querySelector("#add-task");
+    const taskList = document.querySelector("#task-list");
+
+    let tasks = [];
+
+    addTaskButton.addEventListener("click", function () {
+        const task = taskInput.value;
+        if (task) {
+            tasks.push(task);
+            taskInput.value = "";
+            renderTasks();
+            console.log(tasks);
+        }
+    });
+
+    function renderTasks() {
+        taskList.innerHTML = "";
+        for (let i = 0; i < tasks.length; i++) {
+            const task = tasks[i];
+            const listItem = document.createElement("li");
+            listItem.classList.add("list-item");
+            listItem.innerHTML += `
+      ${task}
+      <button class="delete-button" data-index="${i}">Delete</button>
+    `;
+            taskList.appendChild(listItem);
+            console.log(tasks);
+        }
+        const deleteButtons = document.querySelectorAll(".delete-button");
+        for (let i = 0; i < deleteButtons.length; i++) {
+            const deleteButton = deleteButtons[i];
+            deleteButton.addEventListener("click", function () {
+                const index = parseInt(this.getAttribute("data-index"));
+                tasks.splice(index, 1);
+                renderTasks();
+                console.log(tasks);
+            });
+        }
+    }
+
+</script>
+
+</html>
